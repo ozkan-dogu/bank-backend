@@ -20,7 +20,7 @@ export class TransactionsService {
 
   findRecent(): Promise<Transaction[]> {
     return this.dataSource.getRepository(Transaction).find({
-      order: { createdAt: 'DESC' },
+      order: { createdAt: 'DESC', id: 'DESC' },
       take: RECENT_TRANSACTIONS_LIMIT,
     });
   }
@@ -72,7 +72,7 @@ export class TransactionsService {
       }
 
       const bank = await queryRunner.manager.findOne(Bank, {
-        where: {},
+        where: { id: 1 },
         lock: { mode: 'pessimistic_write' },
       });
 
