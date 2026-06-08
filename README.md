@@ -4,6 +4,17 @@ Backend for the **Bank Transactions Simulator** — a NestJS + TypeORM + Postgre
 simulates many people depositing money into a single shared bank account at the same time,
 while guaranteeing that the resulting balance is always correct.
 
+## Live Demo
+
+Frontend:
+https://bank.ozkandogu.dev
+
+Backend:
+https://api-bank.ozkandogu.dev
+
+Swagger:
+https://api-bank.ozkandogu.dev/api/docs
+
 ## Overview
 
 The API exposes:
@@ -75,7 +86,7 @@ Each `{ personId, amount }` item is processed by `TransactionsService.processSin
 3. Loads the **single** `Bank` row with a pessimistic write lock:
    ```ts
    queryRunner.manager.findOne(Bank, {
-     where: {},
+     where: { id: 1 },
      lock: { mode: 'pessimistic_write' },
    });
    ```
